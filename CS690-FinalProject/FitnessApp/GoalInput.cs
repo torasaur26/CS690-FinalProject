@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace FitnessApp
 {
     public class GoalManager
@@ -11,22 +14,21 @@ namespace FitnessApp
                 Console.WriteLine("\nNo current goals or challenges found. Add some to Get Moving!");
                 Console.WriteLine("Press any key to return to the menu...");
                 Console.ReadKey();
-                return;
             }
-
-            int goalIndex = MenuHelper.DisplayMenu("Select a goal/challenge to view:", currentGoals.ToArray());
-            Console.WriteLine($"\nYou selected: {currentGoals[goalIndex]}");
-
-            Console.WriteLine("Click to add a workout update (or press Enter to skip):");
-            string update = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(update))
+            else
             {
-                currentGoals[goalIndex] += $" | Update: {update}";
-                Console.WriteLine("Update saved!");
+                int goalIndex = MenuHelper.DisplayMenu("Select a goal/challenge to view:", currentGoals.ToArray());
+                Console.WriteLine($"\nYou selected: {currentGoals[goalIndex]}");
+                Console.WriteLine("Add a workout update (or press Enter to skip):");
+                string update = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(update))
+                {
+                    currentGoals[goalIndex] += $" | Update: {update}";
+                    Console.WriteLine("Update saved!");
+                }
+                Console.WriteLine("Press any key to return to the menu...");
+                Console.ReadKey();
             }
-
-            Console.WriteLine("Press any key to return to the menu...");
-            Console.ReadKey();
         }
 
         public void AddNewGoal()
@@ -38,6 +40,12 @@ namespace FitnessApp
 
             Console.Write("Enter end date (mm/dd/yyyy): ");
             string date = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(name) || !DateTime.TryParse(date, out _))
+            {
+                Console.WriteLine("Invalid goal name or date. Please try again.");
+                return;
+            }
 
             string[] types = { "Cardio Tracking", "Weight Tracking", "Other" };
             int typeIndex = MenuHelper.DisplayMenu("Select Workout Type", types);
@@ -51,3 +59,4 @@ namespace FitnessApp
         }
     }
 }
+
