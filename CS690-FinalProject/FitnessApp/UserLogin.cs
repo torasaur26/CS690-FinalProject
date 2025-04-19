@@ -10,7 +10,15 @@ namespace FitnessApp
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
 
-            // Placeholder for real validation
+            return Login(username, password); // Use the overload
+        }
+
+        public bool Login(string username, string password)
+        {
+            // Real validation would go here
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                return false;
+
             Console.WriteLine($"\nWelcome back, {username}!");
             Console.WriteLine("Press any key to continue...");
             Console.ReadKey();
@@ -25,10 +33,19 @@ namespace FitnessApp
             Console.Write("Choose a password: ");
             string newPassword = Console.ReadLine();
 
-            // Placeholder for saving account
+            CreateAccount(newUser, newPassword); // Use the overload
+        }
+
+        public bool CreateAccount(string username, string password)
+        {
+            // Real persistence would happen here
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+                return false;
+
             Console.WriteLine("\nAccount created successfully!");
             Console.WriteLine("Press any key to return to login...");
             Console.ReadKey();
+            return true;
         }
     }
 }

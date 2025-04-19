@@ -1,75 +1,86 @@
-public void ShowSettings()
+using System;
+
+namespace FitnessApp
 {
-    bool inSettings = true;
-
-    while (inSettings)
+    public class Notifications
     {
-        Console.Clear();
-        Console.WriteLine("\n--- Settings ---");
-        Console.WriteLine($"Current workout reminder time: {notificationTime}");
-        Console.WriteLine($"Phone number for notifications: {phoneNumber}");
+        private string notificationTime = "8:00 AM";  // default value
+        private string phoneNumber = "Not set";
 
-        string[] options = {
-            "Change Reminder Time",
-            "Setup Push Notifications",
-            "Exit Settings"
-        };
-
-        int selection = MenuHelper.DisplayMenu("Choose a setting to update:", options);
-
-        switch (selection)
+        public void ShowSettings()
         {
-            case 0: // Change Reminder Time
-                Console.Write("Enter new reminder time (e.g., 8:00 AM): ");
-                string inputTime = Console.ReadLine();
+            bool inSettings = true;
 
-                if (DateTime.TryParse(inputTime, out DateTime validTime))
+            while (inSettings)
+            {
+                Console.Clear();
+                Console.WriteLine("\n--- Settings ---");
+                Console.WriteLine($"Current workout reminder time: {notificationTime}");
+                Console.WriteLine($"Phone number for notifications: {phoneNumber}");
+
+                string[] options = {
+                    "Change Reminder Time",
+                    "Setup Push Notifications",
+                    "Exit Settings"
+                };
+
+                int selection = MenuHelper.DisplayMenu("Choose a setting to update:", options);
+
+                switch (selection)
                 {
-                    notificationTime = validTime.ToShortTimeString();
-                    Console.WriteLine($"Reminder time updated to: {notificationTime}");
+                    case 0: // Change Reminder Time
+                        Console.Write("Enter new reminder time (e.g., 8:00 AM): ");
+                        string inputTime = Console.ReadLine();
+
+                        if (DateTime.TryParse(inputTime, out DateTime validTime))
+                        {
+                            notificationTime = validTime.ToShortTimeString();
+                            Console.WriteLine($"Reminder time updated to: {notificationTime}");
+                        }
+                        else
+                        {
+                            Console.WriteLine("Invalid time format. Reminder time not changed.");
+                        }
+                        break;
+
+                    case 1: // Setup Push Notifications
+                        string[] notifyOptions = { "Yes", "No" };
+                        int notifySelection = MenuHelper.DisplayMenu("Enable push notifications?", notifyOptions);
+
+                        if (notifySelection == 0) // Yes
+                        {
+                            Console.Write("Enter your phone number (e.g., 123-456-7890): ");
+                            string inputPhone = Console.ReadLine();
+
+                            if (!string.IsNullOrWhiteSpace(inputPhone))
+                            {
+                                phoneNumber = inputPhone;
+                                Console.WriteLine($"Phone number {phoneNumber} saved for notifications.");
+                                Console.WriteLine($"[Reminder @ {notificationTime}] Time to workout!");
+                            }
+                            else
+                            {
+                                Console.WriteLine("Invalid phone number. Notifications not enabled.");
+                            }
+                        }
+                        else
+                        {
+                            Console.WriteLine("Push notifications not enabled.");
+                        }
+                        break;
+
+                    case 2: // Exit Settings
+                        inSettings = false;
+                        Console.WriteLine("Returning to the main menu...");
+                        break;
                 }
-                else
+
+                if (inSettings)
                 {
-                    Console.WriteLine("Invalid time format. Reminder time not changed.");
+                    Console.WriteLine("\nPress any key to continue...");
+                    Console.ReadKey();
                 }
-                break;
-
-            case 1: // Setup Push Notifications
-                string[] notifyOptions = { "Yes", "No" };
-                int notifySelection = MenuHelper.DisplayMenu("Enable push notifications?", notifyOptions);
-
-                if (notifySelection == 0) // Yes
-                {
-                    Console.Write("Enter your phone number (e.g., 123-456-7890): ");
-                    string inputPhone = Console.ReadLine();
-
-                    if (!string.IsNullOrWhiteSpace(inputPhone))
-                    {
-                        phoneNumber = inputPhone;
-                        Console.WriteLine($"Phone number {phoneNumber} saved for notifications.");
-                        Console.WriteLine($"[Reminder @ {notificationTime}] Time to workout!");
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid phone number. Notifications not enabled.");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Push notifications not enabled.");
-                }
-                break;
-
-            case 2: // Exit Settings
-                inSettings = false;
-                Console.WriteLine("Returning to the main menu...");
-                break;
-        }
-
-        if (inSettings)
-        {
-            Console.WriteLine("\nPress any key to continue...");
-            Console.ReadKey();
+            }
         }
     }
 }
