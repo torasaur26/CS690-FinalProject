@@ -27,7 +27,7 @@
             {
                 string[] mainOptions = {
                     "View Current Goals/Challenges",
-                    "Input New Goal/Challenge",
+                    "Input New Goal/Challenge", // Make sure this is correctly matched to the new method
                     "Settings",
                     "Exit"
                 };
@@ -40,7 +40,7 @@
                         goalManager.ViewGoals();
                         break;
                     case 1:
-                        goalManager.InputGoal();
+                        goalManager.AddNewGoal(); // Updated method name here
                         break;
                     case 2:
                         settingsManager.ShowSettings();
