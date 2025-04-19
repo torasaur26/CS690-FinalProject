@@ -42,4 +42,22 @@
                     case 1:
                         goalManager.InputGoal();
                         break;
-                    case
+                    case 2:
+                        settingsManager.ShowSettings();
+                        break;
+                    case 3:
+                        running = false;
+                        Console.WriteLine("Thank you for using Get Moving! Goodbye.");
+                        break;
+                }
+
+                if (running)
+                {
+                    Console.WriteLine("\nPress any key to continue...");
+                    Console.ReadKey();
+                }
+            }
+        }
+    }
+}
+
