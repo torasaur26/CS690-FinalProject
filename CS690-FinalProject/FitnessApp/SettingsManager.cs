@@ -1,3 +1,5 @@
+using System;
+
 namespace FitnessApp
 {
     public class SettingsManager

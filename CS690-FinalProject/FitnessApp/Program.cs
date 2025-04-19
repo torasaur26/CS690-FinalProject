@@ -47,17 +47,19 @@
                         break;
                     case 3:
                         running = false;
-                        Console.WriteLine("Thank you for using Get Moving! Goodbye.");
+                        Console.WriteLine("Thanks for using Get Moving!");
+                        break;
+                    default:
+                        Console.WriteLine("Invalid selection.");
                         break;
                 }
 
                 if (running)
                 {
-                    Console.WriteLine("\nPress any key to continue...");
+                    Console.WriteLine("\nPress any key to return to the main menu...");
                     Console.ReadKey();
                 }
             }
         }
     }
 }
-
