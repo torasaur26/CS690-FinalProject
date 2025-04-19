@@ -1,4 +1,4 @@
-namespace FitnessApp
+﻿namespace FitnessApp
 {
     class Program
     {
@@ -32,25 +32,5 @@ namespace FitnessApp
                     "Exit"
                 };
 
-                int mainSelection = MenuHelper.DisplayMenu("Welcome to Get Moving!", mainOptions);
+                int mainSelection = MenuHelper.DisplayMenu("Welcome to Get Moving!", main
 
-                switch (mainSelection)
-                {
-                    case 0:
-                        goalManager.ViewGoals();
-                        break;
-                    case 1:
-                        goalManager.AddNewGoal();
-                        break;
-                    case 2:
-                        settingsManager.ShowSettings();
-                        break;
-                    case 3:
-                        Console.WriteLine("Cliché inspirational quote! Goodbye!");
-                        running = false;
-                        break;
-                }
-            }
-        }
-    }
-}
