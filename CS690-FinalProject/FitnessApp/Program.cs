@@ -32,5 +32,14 @@
                     "Exit"
                 };
 
-                int mainSelection = MenuHelper.DisplayMenu("Welcome to Get Moving!", main
+                int mainSelection = MenuHelper.DisplayMenu("Welcome to Get Moving!", mainOptions);
 
+                switch (mainSelection)
+                {
+                    case 0:
+                        goalManager.ViewGoals();
+                        break;
+                    case 1:
+                        goalManager.InputGoal();
+                        break;
+                    case
