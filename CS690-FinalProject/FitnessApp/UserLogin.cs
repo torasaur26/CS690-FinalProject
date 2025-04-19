@@ -10,7 +10,7 @@ namespace FitnessApp
             Console.Write("Enter password: ");
             string password = Console.ReadLine();
 
-            return Login(username, password); // Use the overload
+            return Login(username, password); // Call the overloaded method with parameters
         }
 
         public bool Login(string username, string password)
@@ -33,7 +33,7 @@ namespace FitnessApp
             Console.Write("Choose a password: ");
             string newPassword = Console.ReadLine();
 
-            CreateAccount(newUser, newPassword); // Use the overload
+            CreateAccount(newUser, newPassword); 
         }
 
         public bool CreateAccount(string username, string password)
