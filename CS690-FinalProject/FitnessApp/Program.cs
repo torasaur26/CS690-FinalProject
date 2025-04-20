@@ -1,6 +1,6 @@
 ﻿namespace FitnessApp
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -27,7 +27,7 @@
             {
                 string[] mainOptions = {
                     "View Current Goals/Challenges",
-                    "Input New Goal/Challenge", // Make sure this is correctly matched to the new method
+                    "Input New Goal/Challenge",
                     "Settings",
                     "Exit"
                 };
@@ -40,7 +40,7 @@
                         goalManager.ViewGoals();
                         break;
                     case 1:
-                        goalManager.AddNewGoal(); // Updated method name here
+                        goalManager.AddNewGoal();
                         break;
                     case 2:
                         settingsManager.ShowSettings();
