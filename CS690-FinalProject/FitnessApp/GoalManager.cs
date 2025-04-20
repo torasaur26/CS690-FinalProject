@@ -5,19 +5,24 @@ namespace FitnessApp
 {
     public class GoalManager
     {
+        private readonly Func<string, string[], int> _menuSelector;
         private List<string> currentGoals = new List<string>();
+
+        // Constructor allows injecting a custom menu selector for testing
+        public GoalManager(Func<string, string[], int>? menuSelector = null)
+        {
+            _menuSelector = menuSelector ?? MenuHelper.DisplayMenu;
+        }
 
         public void ViewGoals()
         {
             if (currentGoals.Count == 0)
             {
                 Console.WriteLine("\nNo current goals or challenges found. Add some to Get Moving!");
-                Console.WriteLine("Press any key to return to the menu...");
-                Console.ReadKey();
             }
             else
             {
-                int goalIndex = MenuHelper.DisplayMenu("Select a goal/challenge to view:", currentGoals.ToArray());
+                int goalIndex = _menuSelector("Select a goal/challenge to view:", currentGoals.ToArray());
                 Console.WriteLine($"\nYou selected: {currentGoals[goalIndex]}");
                 Console.WriteLine("Add a workout update (or press Enter to skip):");
                 string update = Console.ReadLine();
@@ -26,8 +31,6 @@ namespace FitnessApp
                     currentGoals[goalIndex] += $" | Update: {update}";
                     Console.WriteLine("Update saved!");
                 }
-                Console.WriteLine("Press any key to return to the menu...");
-                Console.ReadKey();
             }
         }
 
@@ -47,16 +50,23 @@ namespace FitnessApp
                 return;
             }
 
+            Console.WriteLine($"What goal are you trying to reach by {date}? (Describe briefly):");
+            string goalDescription = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(goalDescription))
+            {
+                Console.WriteLine("Goal description cannot be empty. Please try again.");
+                return;
+            }
+
             string[] types = { "Cardio Tracking", "Weight Tracking", "Other" };
-            int typeIndex = MenuHelper.DisplayMenu("Select Workout Type", types);
+            int typeIndex = _menuSelector("Select Workout Type", types);
             string selectedType = types[typeIndex];
 
-            string goalEntry = $"{name} | Due: {date} | Type: {selectedType}";
+            string goalEntry = $"{name} | Due: {date} | Goal: {goalDescription} | Type: {selectedType}";
             currentGoals.Add(goalEntry);
 
-            Console.WriteLine("Goal saved! Press any key to return to the menu...");
-            Console.ReadKey();
+            Console.WriteLine("Goal saved!");
         }
     }
 }
-

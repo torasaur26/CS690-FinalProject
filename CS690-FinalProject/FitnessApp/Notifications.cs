@@ -4,7 +4,7 @@ namespace FitnessApp
 {
     public class Notifications
     {
-        private string notificationTime = "8:00 AM";  // default value
+        private string notificationTime = "8:00 AM";  
         private string phoneNumber = "Not set";
 
         public void ShowSettings()
@@ -29,7 +29,7 @@ namespace FitnessApp
                 switch (selection)
                 {
                     case 0: // Change Reminder Time
-                        Console.Write("Enter new reminder time (e.g., 8:00 AM): ");
+                        Console.Write("Enter new reminder time (use '8:00 AM' format): ");
                         string inputTime = Console.ReadLine();
 
                         if (DateTime.TryParse(inputTime, out DateTime validTime))
@@ -49,14 +49,14 @@ namespace FitnessApp
 
                         if (notifySelection == 0) // Yes
                         {
-                            Console.Write("Enter your phone number (e.g., 123-456-7890): ");
+                            Console.Write("Enter your phone number (use '123-456-7890' format): ");
                             string inputPhone = Console.ReadLine();
 
                             if (!string.IsNullOrWhiteSpace(inputPhone))
                             {
                                 phoneNumber = inputPhone;
                                 Console.WriteLine($"Phone number {phoneNumber} saved for notifications.");
-                                Console.WriteLine($"[Reminder @ {notificationTime}] Time to workout!");
+                                Console.WriteLine($"[Reminder @ {notificationTime}] Time to Get Moving!");
                             }
                             else
                             {
